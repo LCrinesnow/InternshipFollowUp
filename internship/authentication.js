@@ -23,7 +23,9 @@ function ifAuthorized(req,res,next){
           var userInfo = result;
           console.log(result);
        });
-       User.findOne({username:username},function(err,user){
+      var md5 = crypto.createHash('md5'),
+          md5openid = md5.update(openid).digest('hex');
+       User.findOne({openid:md5openid},function(err,user){
            if(err){
                console.log(err);
            }
@@ -32,10 +34,10 @@ function ifAuthorized(req,res,next){
             }
             //对密码进行md5加密
             var md5 = crypto.createHash('md5'),
-                md5openid = md5.update(openid).digest('hex');
+                md5newopenid = md5.update(openid).digest('hex');
             //新建user对象用于保存数据
             var newUser = new User({
-                openid:md5openid//openid 作为key存入，以后再用用户信息就用openid调。
+                openid:md5newopenid//openid 作为key存入，以后再用用户信息就用openid调。
             });
 
             newUser.save(function(err,doc){
