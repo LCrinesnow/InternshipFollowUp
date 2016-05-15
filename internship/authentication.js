@@ -2,7 +2,15 @@
  * Created by rinesnow on 16/3/31.
  */
 //未登录
-
+function getOpenid(){
+    client.getAccessToken(code, function (err, result) {
+      var accessToken = result.data.access_token;
+      var openid = result.data.openid;
+      console.log(accessToken);
+      console.log(openid);
+      return openid;
+    });
+}
 
 function ifAuthorized(req,res,next){
    var OAuth = require('wechat-oauth');
@@ -23,31 +31,30 @@ function ifAuthorized(req,res,next){
           var userInfo = result;
           console.log(result);
        });
-      // var md5 = crypto.createHash('md5'),
-      //     md5openid = md5.update(openid).digest('hex');
-      //  User.findOne({openid:md5openid},function(err,user){
-      //      if(err){
-      //          console.log(err);
-      //      }
-      //       if(user){//有这个user 那么直接跳转
-      //           return res.redirect('/');
-      //       }
-      //       //对密码进行md5加密
-      //       var md5 = crypto.createHash('md5'),
-      //           md5newopenid = md5.update(openid).digest('hex');
-      //       //新建user对象用于保存数据
-      //       var newUser = new User({
-      //           openid:md5newopenid//openid 作为key存入，以后再用用户信息就用openid调。
-      //       });
+    
+       User.findOne({openid:openid},function(err,user){
+           if(err){
+               console.log(err);
+           }
+            if(user){//有这个user 那么直接跳转
+                return res.redirect('/');
+            }
+            // //对密码进行md5加密
+            // var md5 = crypto.createHash('md5'),
+            //     md5newopenid = md5.update(openid).digest('hex');
+            //新建user对象用于保存数据
+            var newUser = new User({
+                openid:openid//openid 作为key存入，以后再用用户信息就用openid调。
+            });
 
-      //       newUser.save(function(err,doc){
-      //           if(err){
-      //               console.log("保存用户信息失败！"+err);
-      //           }
-      //           console.log('保存用户信息成功!');//怎么实现弹出框!!!!??????
-      //           return res.redirect('/');
-      //       });
-      //   });
+            newUser.save(function(err,doc){
+                if(err){
+                    console.log("保存用户信息失败！"+err);
+                }
+                console.log('保存用户信息成功!');//怎么实现弹出框!!!!??????
+                return res.redirect('/');
+            });
+        });
 
     });   
 
