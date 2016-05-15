@@ -9,13 +9,6 @@ var session= require('express-session');
 var moment = require('moment');
 var authentication = require('./authentication.js');
 
-var OAuth = require('wechat-oauth');
-var client = new OAuth('wx75d11b4f981b1ded', '7a915c525f39451f3af19407012459ad');
-
-
-
-
-
 var app = express();
 
 
@@ -80,16 +73,6 @@ app.use(function(req, res, next) {
 app.get('/',authentication.ifAuthorized);//检测是否登录了
 app.get('/',function(req,res){
 
-    var query = require('url').parse(req.url,true).query;
-    var code = query.code;
-    client.getAccessToken(code, function (err, result) {
-      var accessToken = result.data.access_token;
-      var openid = result.data.openid;
-      console.log(access_token);
-      console.log(openid);
-
-    });
-
     Note.find({author:req.session.user.username}).exec(function(err,allNotes){
         if(err){
             console.log(err);
@@ -107,93 +90,24 @@ app.get('/',function(req,res){
 ///注册
 
 //响应注册页面get请求
-app.get('/register',authentication.noReLogin);//不能重复注册了  必须是'/register'因为是针对register的页面的
-app.get('/register',function(req,res){
-   console.log('注册!');
-    res.render('register',{
-        //在跳转页面之前，将user信息数据传入EJS模板。
-        user: req.session.user,
-        title:'注册'
-    });
-});
-//响应注册页面post请求
-app.post('/register',function(req,res){
-    var username = req.body.username,
-       password = req.body.password,
-       passwordRepeat = req.body.passwordRepeat;
+// app.get('/register',authentication.noReLogin);//不能重复注册了  必须是'/register'因为是针对register的页面的
+// app.get('/register',function(req,res){
+//    console.log('注册!');
+//     res.render('register',{
+//         //在跳转页面之前，将user信息数据传入EJS模板。
+//         user: req.session.user,
+//         title:'注册'
+//     });
+// });
+// //响应注册页面post请求
+// app.post('/register',function(req,res){
+//     var username = req.body.username,
+//        password = req.body.password,
+//        passwordRepeat = req.body.passwordRepeat;
 
-    if(username.trim().length == 0){
-        req.session.error='用户名不能为空!';//传到前面的   页面提示功能
-        return res.redirect('/register');
-    }
-    if(password.trim().length == 0||passwordRepeat.trim().length ==0){
-        req.session.error='密码和确认密码不能为空!';//传到前面的   页面提示功能
-        return res.redirect('/register');
-    }
-    if(password !=passwordRepeat){
-        req.session.error='两次输入的密码不一致!';//传到前面的   页面提示功能
-        return res.redirect('/register');
-    }
-    //正则判断
-    var regUsername =/[^a-zA-Z0-9_]{1,}/;//包含(非法符号) 除大写和小写字母还有数字下划线以外的字符只要出现一次的 [所有{1,}]表达式
-    //若满足,则证明不符合要求.
-    //console.log(regUsername.test(username));//true 是  是非法符号
-    //console.log(username.trim().length<=20);
-    //console.log(username.trim().length>=3);
-    if(regUsername.test(username)||//要么包含非法符号
-         username.trim().length>20||//要么大于20小于3
-         username.trim().length<3){
-        req.session.error='用户名只能是字母、数字、下划线的组合，长度3-20个字符!';//传到前面的   页面提示功能
-        return res.redirect('/register');
-    }
-
-    var regPassword1 =/[a-z]{1,}/;// 等价于  /[a-z]+/
-    var regPassword2 =/[A-Z]{1,}/;// 等价于  /[A-Z]+/
-    var regPassword3 =/[0-9]{1,}/;// 等价于  /[0-9]+/
-    //console.log(regPassword1.test(password));
-    //console.log(regPassword2.test(password));
-    //console.log(regPassword3.test(password));
-    //console.log(password.trim().length);
-
-    //若四个里面有一个false则提示
-    if(!(regPassword1.test(password)&&
-        regPassword2.test(password)&&
-        regPassword3.test(password)&&
-        password.trim().length>=6)){
-        req.session.error='密码长度不能少于6，必须同时包含数字、小写字母、大写字母!';//传到前面的   页面提示功能
-        return res.redirect('/register');
-    }
-
-    //检查用户名是否已经存在,如果不存在,则保存该条纪录
-    User.findOne({username:username},function(err,user){
-       if(err){
-           console.log(err);
-           return res.redirect('/register');
-       }
-        if(user){
-            req.session.error='用户名已经存在!请换个用户名注册';//传到前面的   页面提示功能
-            return res.redirect('/register');
-        }
-        //对密码进行md5加密
-        var md5 = crypto.createHash('md5'),
-            md5password = md5.update(password).digest('hex');
-        //新建user对象用于保存数据
-        var newUser = new User({
-            username:username,
-            password:md5password
-        });
-
-        newUser.save(function(err,doc){
-            if(err){
-                console.log(err);
-                return res.redirect('/register');
-            }
-            //req.session.success='注册成功!';//加个登录链接
-            console.log('注册成功!');//怎么实现弹出框!!!!??????
-            return res.redirect('/');
-        });
-    });
-});
+//     //检查用户名是否已经存在,如果不存在,则保存该条纪录
+   
+// });
 
 
 
