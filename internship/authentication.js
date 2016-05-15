@@ -23,15 +23,38 @@ function ifAuthorized(req,res,next){
           var userInfo = result;
           console.log(result);
        });
-    });
-   
+       User.findOne({username:username},function(err,user){
+           if(err){
+               console.log(err);
+           }
+            if(user){//有这个user 那么直接跳转
+                return res.redirect('/');
+            }
+            //对密码进行md5加密
+            var md5 = crypto.createHash('md5'),
+                md5openid = md5.update(openid).digest('hex');
+            //新建user对象用于保存数据
+            var newUser = new User({
+                openid:md5openid//openid 作为key存入，以后再用用户信息就用openid调。
+            });
 
-        if(!req.session.user){
-            console.log('抱歉,您还没有登录!');
-            return res.redirect('/login');//返回登录页面
-        }
-        next();
-    }
+            newUser.save(function(err,doc){
+                if(err){
+                    console.log("保存用户信息失败！"+err);
+                }
+                console.log('保存用户信息成功!');//怎么实现弹出框!!!!??????
+                return res.redirect('/');
+            });
+        });
+
+    });   
+
+    // if(!req.session.user){
+    //     console.log('抱歉,您还没有登录!');
+    //     return res.redirect('/login');//返回登录页面
+    // }
+    next();
+}
 
 
 function noReLogin(req,res,next){
