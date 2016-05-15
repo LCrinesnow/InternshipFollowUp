@@ -1,0 +1,20 @@
+{
+  "name": "wechat",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.13.4",
+    "promise": "^7.1.1",
+    "qs": "^6.1.0",
+    "request": "^2.72.0",
+    "tmpl": "^1.0.4",
+    "ws": "^1.1.0",
+    "xml2js": "^0.4.16"
+  }
+}
