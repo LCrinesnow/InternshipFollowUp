@@ -188,7 +188,7 @@ app.post('/post',function(req,res){
             if(user){//有这个user 那么直接跳转
                 return res.redirect('/');
             }
-        )};
+        });
    var note = new Note({
        title:req.body.title,
        author:openid,
