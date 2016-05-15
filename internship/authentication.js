@@ -76,3 +76,4 @@ function noReLogin(req,res,next){
 }
 exports.ifAuthorized = ifAuthorized;
 exports.noReLogin= noReLogin;
+exports.getOpenid= getOpenid;
