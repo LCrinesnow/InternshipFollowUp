@@ -19,15 +19,19 @@ function ifAuthorized(req,res,next){
       var openid = result.data.openid;
       console.log(accessToken);
       console.log(openid);
-      console.log(err);
 
     });
-    if(!req.session.user){
-        console.log('抱歉,您还没有登录!');
-        return res.redirect('/login');//返回登录页面
+    client.getUser(openid, function (err, result) {
+      var userInfo = result;
+      console.log(result);
+    });
+
+        if(!req.session.user){
+            console.log('抱歉,您还没有登录!');
+            return res.redirect('/login');//返回登录页面
+        }
+        next();
     }
-    next();
-}
 
 
 function noReLogin(req,res,next){
