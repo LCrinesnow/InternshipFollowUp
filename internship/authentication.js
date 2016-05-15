@@ -2,10 +2,9 @@
  * Created by rinesnow on 16/3/31.
  */
 //未登录
-function getOpenid(){
-    var OAuth = require('wechat-oauth');
+   var OAuth = require('wechat-oauth');
    var client = new OAuth('wx75d11b4f981b1ded', '7a915c525f39451f3af19407012459ad');
-
+function getOpenid(req,res){
     var query = require('url').parse(req.url,true).query;
     client.getAccessToken(code, function (err, result) {
       var accessToken = result.data.access_token;
@@ -17,8 +16,6 @@ function getOpenid(){
 }
 
 function ifAuthorized(req,res,next){
-   var OAuth = require('wechat-oauth');
-   var client = new OAuth('wx75d11b4f981b1ded', '7a915c525f39451f3af19407012459ad');
 
     var query = require('url').parse(req.url,true).query;
           console.log(query);
