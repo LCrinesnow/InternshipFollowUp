@@ -11,6 +11,8 @@ function getOpenid(req,res){
       var openid = result.data.openid;
       console.log(accessToken);
       console.log(openid);
+            console.log(err);
+
       return openid;
     });
 }

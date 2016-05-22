@@ -73,7 +73,7 @@ app.use(function(req, res, next) {
 app.get('/',authentication.ifAuthorized);//检测是否登录了
 app.get('/',function(req,res){
 //openid???
-    var openid=authentication.getOpenid();
+    var openid=authentication.getOpenid;
     console.log('在／中'+openid);
     Note.find({author:openid}).exec(function(err,allNotes){
         if(err){
