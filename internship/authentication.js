@@ -27,16 +27,16 @@ function ifAuthorized(req,res,next){
     var code = query.code;
           console.log(code);
     
-    client.getUserByCode(code,function (err, result) {
+    client.getUserByCode(code,openid=function (err, result) {
       // var accessToken = result.data.access_token;
             console.log("这是openid1"+openid);
 
-      openid = result.openid;//必须要手动点击URL，原地刷新没用的。
+      // openid = result.openid;//必须要手动点击URL，原地刷新没用的。
 
       console.log(result);
       // console.log(accessToken);
 
-      console.log("这是openid2"+openid);
+      console.log("这是openid2"+result.openid);
     
       // client.getUser(openid, function (err, result) {
       //     var userInfo = result;
@@ -66,6 +66,7 @@ function ifAuthorized(req,res,next){
     //             return res.redirect('/');
     //         });
     //     });
+    return result.openid;
     });   
 
 //    // if(!req.session.user){
