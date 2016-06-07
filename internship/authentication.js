@@ -29,7 +29,7 @@ function ifAuthorized(req,res,next){
 
     client.getUserByCode(code,function (err, result) {
       // var accessToken = result.data.access_token;
-      // var openid = result.data.openid;
+      var openid = result.data.openid;
       console.log(result);
       console.log(accessToken);
 
