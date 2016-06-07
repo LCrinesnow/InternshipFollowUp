@@ -168,17 +168,17 @@ app.get('/',function(req,res){
     //     user: req.session.user,//也要加?
     //     title:'发布'
     // });
-    Note.find({author:openid}).exec(function(err,allNotes){
-        if(err){
-            console.log(err);
-            return res.redirect('/');
-        }
-        res.render('index',{
-           title:'首页',
-            openid: openid,
-            notes:allNotes
-        });
-    })
+    // Note.find({author:openid}).exec(function(err,allNotes){
+    //     if(err){
+    //         console.log(err);
+    //         return res.redirect('/');
+    //     }
+    //     res.render('index',{
+    //        title:'首页',
+    //         openid: openid,
+    //         notes:allNotes
+    //     });
+    // })
 });
 
 
