@@ -36,7 +36,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 //建立session模型
 app.use(session({
     secret:'liuchong',//?
-    name:'mynote',
+    name:'intern',
     //一周内免登录
     cookie:{maxAge:1000 * 60 * 60*24*7},//设置session的保存时间为 60min*24小时*7一周
     resave: false,
@@ -70,7 +70,7 @@ app.use(function(req, res, next) {
 
 
 //响应首页get请求
-app.get('/',authentication.ifAuthorized);//检测是否登录了
+// app.get('/',authentication.ifAuthorized);//检测是否登录了
 app.get('/',function(req,res){
 //openid???
     var openid=authentication.getOpenid;
@@ -89,72 +89,6 @@ app.get('/',function(req,res){
 });
 
 
-///注册
-
-//响应注册页面get请求
-// app.get('/register',authentication.noReLogin);//不能重复注册了  必须是'/register'因为是针对register的页面的
-// app.get('/register',function(req,res){
-//    console.log('注册!');
-//     res.render('register',{
-//         //在跳转页面之前，将user信息数据传入EJS模板。
-//         user: req.session.user,
-//         title:'注册'
-//     });
-// });
-// //响应注册页面post请求
-// app.post('/register',function(req,res){
-//     var username = req.body.username,
-//        password = req.body.password,
-//        passwordRepeat = req.body.passwordRepeat;
-
-//     //检查用户名是否已经存在,如果不存在,则保存该条纪录
-   
-// });
-
-
-
-//登录
-
-//响应登录页面get请求
-// app.get('/login',authentication.noReLogin);//不能重复登录  //必须是'/login'因为是针对login的页面的
-// app.get('/login',function(req,res){
-//    console.log('登录!');
-//     res.render('login',{
-//         user: req.session.user,//也要加?
-//         title:'登录'
-//     });
-// });
-//响应登录页面post请求
-// app.post('/login',function(req,res){
-//     var username = req.body.username, password = req.body.password;
-//     console.log(username);
-//     console.log(password);
-
-//     User.findOne({username:username},function(err,user){
-//        if(err){
-//            console.log(err);
-//            return res.redirect('/login');
-//        }
-//         if(!user){
-//             req.session.error='用户不存在!';//传到前面的   页面提示功能
-//             return res.redirect('/login');
-//         }
-//         var md5 = crypto.createHash('md5'),
-//                 md5password = md5.update(password).digest('hex');
-//         if(user.password!==md5password) {
-//             req.session.error = '用户名或密码不正确';//传到前面的   页面提示功能
-//             return res.redirect('/login');
-//         }
-//         console.log('登录成功!');
-//         //保存session,可以很方便的通过req参数来存储和访问session对象的数据
-//         user.password = null;//?
-//         delete  user.password;
-//         req.session.user = user;
-//         //req.session是一个JSON格式的JavaScript对象，我们可以在使用的过程中随意的增加成员。
-//         return res.redirect('/');
-//     });
-// });
-
 
 
 //登出
@@ -170,7 +104,7 @@ app.get('/quit',function(req,res){
 //发布
 
 //响应发布get请求
-app.get('/post',authentication.ifAuthorized);//检测是否登录了
+// app.get('/post',authentication.ifAuthorized);//检测是否登录了
 app.get('/post',function(req,res){
    console.log('发布!');
     res.render('post',{
@@ -209,7 +143,7 @@ app.post('/post',function(req,res){
 
 //博客细节
 
-app.get('/detail/',authentication.ifAuthorized);//检测是否登录了
+// app.get('/detail/',authentication.ifAuthorized);//检测是否登录了
 app.get('/detail/:_id',function(req,res){//:id?
    console.log('查看笔记!');
     Note.findOne({_id:req.params._id}).exec(function(err,art){
