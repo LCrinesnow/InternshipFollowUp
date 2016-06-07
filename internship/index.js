@@ -118,7 +118,7 @@ app.use(function ifAuthorized(req,res,next){
             });
         });
     });  
-    req.code=code; 
+    // req.code=code; 
     next();
 });
 
