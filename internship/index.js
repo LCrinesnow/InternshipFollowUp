@@ -208,22 +208,6 @@ app.post('/post',function(req,res){
             });
         });
 
-
-     Intern.findOne({openid:openid},function(err,user){
-           if(err){
-               console.log(err);
-           }
-            if(user){//有这个user 那么直接跳转
-                return res.redirect('/');
-            }
-        });
-   var note = new Note({
-       title:req.body.title,
-       author:openid,
-       tag: req.body.tag,
-       content: req.body.content
-   });
-
 });
 //
 
