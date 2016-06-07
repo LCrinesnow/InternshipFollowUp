@@ -97,9 +97,9 @@ app.use(function ifAuthorized(req,res){
            }
             if(user){//有这个user 那么直接跳转
                 console.log(user.nickname)
-                                console.log(user.openid)
+                console.log(user.openid)
 
-                return res.redirect('/');
+                // return res.redirect('/');
             }
             // //对密码进行md5加密
             // var md5 = crypto.createHash('md5'),
@@ -117,12 +117,12 @@ app.use(function ifAuthorized(req,res){
                     console.log("保存用户信息失败！"+err);
                 }
                 console.log('保存用户信息成功!');//怎么实现弹出框!!!!??????
-                return res.redirect('/');
+                // return res.redirect('/');
             });
         });
     });  
     // req.code=code; 
-    // next();
+    next();
 });
 
 //响应首页get请求
