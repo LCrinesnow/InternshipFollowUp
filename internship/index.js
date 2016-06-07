@@ -73,7 +73,7 @@ app.use(function(req, res, next) {
    var OAuth = require('wechat-oauth');
    var client = new OAuth('wx75d11b4f981b1ded', '7a915c525f39451f3af19407012459ad');
  // var openid='hehehe';
-app.use(function ifAuthorized(req,res){
+app.get('/',function ifAuthorized(req,res){
 
     // var url = client.getAuthorizeURL('www.coderwitkey.com', 'STATE', 'snsapi_userinfo');
     var query = require('url').parse(req.url,true).query;
@@ -81,16 +81,10 @@ app.use(function ifAuthorized(req,res){
 
     var code = query.code;
           console.log(code);
-    
-    client.getUserByCode(code,function (err, result,next) {
-      // var accessToken = result.data.access_token;
+ 
+    client.getUserByCode(code,function (err, result) {
       // var openid = result.openid;//必须要手动点击URL，原地刷新没用的。
-
-      console.log('这是result:'+result.openid);
-      // console.log(accessToken);
-
-      // console.log("这是openid2"+openid);
-
+       console.log('这是result:'+result.openid);
        User.findOne({openid:result.openid},function(err,user){
            if(err){
                console.log('这是err'+err);
@@ -98,54 +92,63 @@ app.use(function ifAuthorized(req,res){
             if(user){//有这个user 那么直接跳转
                 console.log(user.nickname)
                 console.log(user.openid)
-
+                res.render('login',{
+                    // user: req.session.user,//也要加?
+                    title:'内推推推'
+                });
                 // return res.redirect('/');
             }
             // //对密码进行md5加密
             // var md5 = crypto.createHash('md5'),
             //     md5newopenid = md5.update(openid).digest('hex');
             //新建user对象用于保存数据
-            var newUser = new User({
+            else{
+                var newUser = new User({
                 
-                openid:result.openid,//openid 作为key存入，以后再用用户信息就用openid调。
-                nickname:result.nickname,
-                headimg:result.headimgurl
-            });
+                    openid:result.openid,//openid 作为key存入，以后再用用户信息就用openid调。
+                    nickname:result.nickname,
+                    headimg:result.headimgurl
+                });
 
-            newUser.save(function(err,doc){
-                if(err){
-                    console.log("保存用户信息失败！"+err);
-                }
-                console.log('保存用户信息成功!');//怎么实现弹出框!!!!??????
-                // return res.redirect('/');
-            });
+                newUser.save(function(err,doc){
+                    if(err){
+                        console.log("保存用户信息失败！"+err);
+                    }
+                    console.log('保存用户信息成功!');//怎么实现弹出框!!!!??????
+                    res.render('login',{
+                        // user: req.session.user,//也要加?
+                        title:'内推推推'
+                    });
+                    // return res.redirect('/');
+                });
+            }
         });
     });  
     // req.code=code; 
-    next();
+    // next();
 });
 
 //响应首页get请求
 // app.get('/',authentication.ifAuthorized);//检测是否登录了
-app.get('/',function(req,res){
+// app.get('/',function(req,res){
     
-      console.log('首页!');
-    res.render('login',{
-        // user: req.session.user,//也要加?
-        title:'内推推推'
-    });
-    // Note.find({author:openid}).exec(function(err,allNotes){
-    //     if(err){
-    //         console.log(err);
-    //         return res.redirect('/');
-    //     }
-    //     res.render('index',{
-    //        title:'首页',
-    //         openid: openid,
-    //         notes:allNotes
-    //     });
-    // })
-});
+//       console.log('首页!');
+//     res.render('login',{
+//         // user: req.session.user,//也要加?
+//         title:'内推推推'
+//     });
+//     // Note.find({author:openid}).exec(function(err,allNotes){
+//     //     if(err){
+//     //         console.log(err);
+//     //         return res.redirect('/');
+//     //     }
+//     //     res.render('index',{
+//     //        title:'首页',
+//     //         openid: openid,
+//     //         notes:allNotes
+//     //     });
+//     // })
+// });
 
 
 
