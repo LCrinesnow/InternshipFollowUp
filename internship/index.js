@@ -70,11 +70,34 @@ app.use(function(req, res, next) {
 
 
 //响应首页get请求
-app.get('/',authentication.ifAuthorized);//检测是否登录了
+// app.get('/',authentication.ifAuthorized);//检测是否登录了
 app.get('/',function(req,res){
 //openid???
     // var openid=authentication.getOpenid;
     // console.log('在／中'+openid);
+    var OAuth = require('wechat-oauth');
+    var client = new OAuth('wx75d11b4f981b1ded', '7a915c525f39451f3af19407012459ad');
+
+    var query = require('url').parse(req.url,true).query;
+          console.log(query);
+
+    var code = query.code;
+          console.log(code);
+
+    client.getAccessToken(code, function (err, result) {
+      var accessToken = result.data.access_token;
+      var openid = result.data.openid;
+      console.log(accessToken);
+      console.log(openid);
+      client.getUser(openid, function (err, result) {
+          var userInfo = result;
+          console.log(result);
+       });
+
+
+
+
+
     Note.find({author:openid}).exec(function(err,allNotes){
         if(err){
             console.log(err);
