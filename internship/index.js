@@ -91,7 +91,7 @@ app.use(function ifAuthorized(req,res,next){
 
       // console.log("这是openid2"+openid);
 
-       User.findOne({openid:result.openid},function(err){
+       User.findOne({openid:result.openid},function(err,user){
            if(err){
                console.log('这是err'+err);
            }
