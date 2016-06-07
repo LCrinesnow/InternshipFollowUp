@@ -19,15 +19,17 @@
 
 function ifAuthorized(req,res,next){
 
+    // var url = client.getAuthorizeURL('www.coderwitkey.com', 'STATE', 'snsapi_userinfo');
+
     var query = require('url').parse(req.url,true).query;
           console.log(query);
 
     var code = query.code;
           console.log(code);
 
-    client.getAccessToken(code, function (err, result) {
-      var accessToken = result.data.access_token;
-      var openid = result.data.openid;
+    client.getUserByCode(code,function (err, result) {
+      // var accessToken = result.data.access_token;
+      // var openid = result.data.openid;
       console.log(result);
       console.log(accessToken);
 
@@ -37,7 +39,7 @@ function ifAuthorized(req,res,next){
       //     var userInfo = result;
       //     console.log(userInfo);
       //  });
-      
+
        User.findOne({openid:openid},function(err,user){
            if(err){
                console.log(err);
