@@ -179,16 +179,6 @@ app.get('/post',function(req,res){
 //响应发布post请求
 app.post('/post',function(req,res){
 
-
-       Intern.findOne({createTime:Date.now},function(err,intern){
-           if(err){
-               console.log(err);
-           }
-           
-            // //对密码进行md5加密
-            // var md5 = crypto.createHash('md5'),
-            //     md5newopenid = md5.update(openid).digest('hex');
-            //新建user对象用于保存数据
             var newIntern = new Intern({
                 
                 openid:'hehehe',//用户的id
@@ -212,7 +202,7 @@ app.post('/post',function(req,res){
                 }
                
             });
-        });
+    
 
 });
 //
@@ -220,15 +210,21 @@ app.post('/post',function(req,res){
 
 app.get('/list',function(req,res){
      Intern.find().exec(function(err,allInterns){
-            if(err){
-                console.log(err);
-                return res.redirect('/');
-            }
-            res.render('',{
-                title:'内推列表',
-                interns:allInterns
+        if(err){
+            console.log(err);
+            res.render('login',{
+                    // user: req.session.user,//也要加?
+              title:'内推推推'
             });
-        })
+        }
+        else{
+            res.render('list',{
+            title:'内推列表',
+            interns:allInterns
+            });
+        }
+            
+    })
 });
 
 //博客细节
