@@ -92,7 +92,7 @@ app.use(function ifAuthorized(req,res,next){
       console.log(result);
       // console.log(accessToken);
 
-      console.log("这是openid2"+openid););
+      console.log("这是openid2"+openid);
 
 
        User.findOne({openid:openid},function(err,user){
