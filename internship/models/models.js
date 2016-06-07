@@ -5,24 +5,25 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var userSchema = new Schema({
-    username: String,
-    password: String,
-    email: String,
+    openid: String,
+    nickname: String,
+    headimg: String,
     createTime: {
         type:Date,
         default:Date.now
     }
 });
 
-var noteSchema = new Schema({
-    title:String,
-    author:String,
-    tag:String,
+var internSchema = new Schema({
+    openid:String,//用户的id
+    company:String,
+    email:String,
+    category:String,
     content:String,
     createTime:{
         type:Date,
         default:Date.now
     }
 });
-exports.Note = mongoose.model('Note',noteSchema);
+exports.Intern = mongoose.model('Intern',noteSchema);
 exports.User = mongoose.model('User',userSchema);

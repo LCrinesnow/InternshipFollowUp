@@ -19,7 +19,7 @@ var mongoose = require('mongoose');
 var models = require('./models/models');
 
 var User = models.User;
-var Note = models.Note;
+var Intern = models.Intern;
 
 mongoose.connect('mongodb://localhost:27017/interns');
 mongoose.connection.on('error',console.error.bind(console,'连接数据库失败!'));
@@ -103,8 +103,9 @@ app.use(function ifAuthorized(req,res,next){
             //     md5newopenid = md5.update(openid).digest('hex');
             //新建user对象用于保存数据
             var newUser = new User({
-                name:result.nickname,
+                
                 openid:openid,//openid 作为key存入，以后再用用户信息就用openid调。
+                name:result.nickname,
                 headimg:result.headimgurl
             });
 
