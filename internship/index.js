@@ -72,11 +72,18 @@ app.get('/',function ifAuthorized(req,res){
     // var url = client.getAuthorizeURL('www.coderwitkey.com', 'STATE', 'snsapi_userinfo');
     var query = require('url').parse(req.url,true).query;
           console.log(query);
+    
+    if(req.session.code==code){
+        res.render('login',{
+             user: req.session.user,//也要加?
+             title:'内推推推'
+        });
+    }else{
+         var code = query.code;
+         req.session.code=code;
 
-    var code = query.code;
           console.log(code);
- 
-    client.getUserByCode(code,function (err, result) {
+          client.getUserByCode(code,function (err, result) {
       // var openid = result.openid;//必须要手动点击URL，原地刷新没用的。
        console.log('这是result:'+result.openid);
        User.findOne({openid:result.openid},function(err,user){
@@ -119,6 +126,11 @@ app.get('/',function ifAuthorized(req,res){
             }
         });
     });  
+    }
+   
+ 
+    
+    
 });
 
 
