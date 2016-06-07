@@ -87,7 +87,7 @@ app.use(function ifAuthorized(req,res,next){
 
             console.log("这是openid1"+openid);
 
-      openid = result.openid;//必须要手动点击URL，原地刷新没用的。
+      var openid = result.openid;//必须要手动点击URL，原地刷新没用的。
 
       console.log(result);
       // console.log(accessToken);
