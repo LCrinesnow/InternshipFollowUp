@@ -76,21 +76,7 @@ app.get('/',function(req,res){
     // var openid=authentication.getOpenid;
     // console.log('在／中'+openid);
 
-var OAuth = require('wechat-oauth');
-   var client = new OAuth('wx75d11b4f981b1ded', '7a915c525f39451f3af19407012459ad');
-    var query = require('url').parse(req.url,true).query;
-          console.log(query);
-
-    var code = query.code;
-          console.log(code);
-
-    client.getUserByCode(code,function (err, result) {
-      // var accessToken = result.data.access_token;
-      var openid = result.openid;//必须要手动点击URL，原地刷新没用的。
-      console.log(result);
-      // console.log(accessToken);
-
-      console.log("这是openid"+openid);
+    console.log( '这是req'+req);
 
     Note.find({author:openid}).exec(function(err,allNotes){
         if(err){
