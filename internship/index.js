@@ -234,15 +234,15 @@ app.get('/list',function(req,res){
 app.get('/detail/:_id',function(req,res){//:id?
    
 
-   console.log('查看笔记!');
-    Intern.findOne({_id:req.params._id}).exec(function(err,interns){
+   console.log('查看实习!');
+    Intern.findOne({_id:req.params._id}).exec(function(err,intern){
         if(err){
             console.log(err);
             return res.redirect('/');
         }
         if(intern) {
             res.render('detail', {
-                title: '笔记详情',
+                title: '实习详情',
                 intern: intern,
                 moment:moment
             });
