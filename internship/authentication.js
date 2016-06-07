@@ -26,10 +26,10 @@ function ifAuthorized(req,res,next){
 
     var code = query.code;
           console.log(code);
-    var openid;
-    client.getUserByCode(code,function (openid,err, result) {
+    // var openid='';
+    client.getUserByCode(code,function (req,res,err, result) {
       // var accessToken = result.data.access_token;
-      openid = result.openid;//必须要手动点击URL，原地刷新没用的。
+      var openid = result.openid;//必须要手动点击URL，原地刷新没用的。
 
       console.log(result);
       // console.log(accessToken);
@@ -64,15 +64,15 @@ function ifAuthorized(req,res,next){
     //             return res.redirect('/');
     //         });
     //     });
-    
+        req.openid=openid;
+    console.log('req.openid:'+req.openid);
     });   
 
 //    // if(!req.session.user){
 //    //     console.log('抱歉,您还没有登录!');
 //    //     return res.redirect('/login');//返回登录页面
 //    // }
-    req.openid=openid;
-    console.log('req.openid:'+req.openid);
+
     console.log('req.openid:'+req.openid);
     next();
 }
