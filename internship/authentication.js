@@ -25,11 +25,14 @@ function ifAuthorized(req,res,next){
     var code = query.code;
           console.log(code);
 
-    client.getAccessToken('code', function (err, result) {
+    client.getAccessToken(code, function (err, result) {
       var accessToken = result.data.access_token;
       var openid = result.data.openid;
+      console.log(result);
       console.log(accessToken);
+
       console.log("这是openid"+openid);
+    });
       client.getUser(openid, function (err, result) {
           var userInfo = result;
           console.log(userInfo);
