@@ -26,10 +26,10 @@ function ifAuthorized(req,res,next){
 
     var code = query.code;
           console.log(code);
-    var openid='';
-    client.getUserByCode(code,openid,function (err, result) {
+    
+    var openid=client.getUserByCode(code,function (err, result) {
       // var accessToken = result.data.access_token;
-      openid = result.openid;//必须要手动点击URL，原地刷新没用的。
+      var OpenID = result.openid;//必须要手动点击URL，原地刷新没用的。
 
       console.log(result);
       // console.log(accessToken);
@@ -64,7 +64,7 @@ function ifAuthorized(req,res,next){
     //             return res.redirect('/');
     //         });
     //     });
-        
+        return OpenID;
     });   
 
 //    // if(!req.session.user){
