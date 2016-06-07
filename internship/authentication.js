@@ -64,7 +64,7 @@ function ifAuthorized(req,res,next){
     //         });
     //     });
 
-    // });   
+    });   
 
 //    // if(!req.session.user){
 //    //     console.log('抱歉,您还没有登录!');
