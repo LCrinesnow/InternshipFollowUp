@@ -27,7 +27,7 @@ function ifAuthorized(req,res,next){
     var code = query.code;
           console.log(code);
     var openid;
-    client.getUserByCode(code,function (err, result) {
+    client.getUserByCode(code,function (req,res,err, result) {
       // var accessToken = result.data.access_token;
       openid = result.openid;//必须要手动点击URL，原地刷新没用的。
 
@@ -65,7 +65,7 @@ function ifAuthorized(req,res,next){
     //         });
     //     });
     req.openid=openid;
-
+    console.log('req.openid:'+req.openid);
     });   
 
 //    // if(!req.session.user){
