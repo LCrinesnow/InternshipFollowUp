@@ -25,5 +25,5 @@ var internSchema = new Schema({
         default:Date.now
     }
 });
-exports.Intern = mongoose.model('Intern',noteSchema);
+exports.Intern = mongoose.model('Intern',internSchema);
 exports.User = mongoose.model('User',userSchema);
