@@ -29,8 +29,9 @@ function ifAuthorized(req,res,next){
 
     client.getUserByCode(code,function (err, result) {
       // var accessToken = result.data.access_token;
-      var openid = result.openid;
       console.log(result);
+      var openid = result.openid;
+
       // console.log(accessToken);
 
       console.log("这是openid"+openid);
