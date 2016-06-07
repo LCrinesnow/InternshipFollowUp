@@ -31,7 +31,7 @@ function ifAuthorized(req,res,next){
       // var accessToken = result.data.access_token;
       var openid = result.data.openid;
       console.log(result);
-      console.log(accessToken);
+      // console.log(accessToken);
 
       console.log("这是openid"+openid);
     
