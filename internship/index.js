@@ -46,22 +46,23 @@ app.use(session({
 
 
 
-//添加  页面提示功能
-// app.use(function(req, res, next) {
-//     res.locals.user = req.session.user;//???
-//     var err = req.session.error;//赋值给err变量,
-//     //var success = req.session.success;//赋值给err变量,
+//添加  页面提示功能   目前没用
+app.use(function(req, res, next) {
+    res.locals.user = req.session.user;//???
+    var err = req.session.error;//赋值给err变量,
+    //var success = req.session.success;//赋值给err变量,
 
-//     delete req.session.error;//然后清空session内的数据
-//     res.locals.message = '';//初始化
-//     //res.locals.success = '';//初始化
+    delete req.session.error;//然后清空session内的数据
+    res.locals.message = '';//初始化
+    //res.locals.success = '';//初始化
 
-//     if (err) {
-//         //html通过js被操作,在html中用{%-message%}调用
-//         res.locals.message = '<div class="alert alert-warning">' + err + '</div>';
-//     }
-//     next();//?
-// });
+    if (err) {
+        //html通过js被操作,在html中用{%-message%}调用
+        res.locals.message = '<div class="alert alert-warning">' + err + '</div>';
+    }
+    next();//
+});
+//添加  页面提示功能   目前没用
 
 
 var OAuth = require('wechat-oauth');
