@@ -120,7 +120,7 @@ app.use(function ifAuthorized(req,res,next){
         });
     });   
     next();
-}
+});
 
 //响应首页get请求
 // app.get('/',authentication.ifAuthorized);//检测是否登录了
