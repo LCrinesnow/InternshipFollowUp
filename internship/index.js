@@ -91,13 +91,13 @@ app.use(function ifAuthorized(req,res,next){
 
       console.log("这是openid2"+openid);
 
-       User.findOne({openid:openid},function(err){
+       User.findOne({openid:openid},function(err,user){
            if(err){
                console.log(err);
            }
-            // if(user){//有这个user 那么直接跳转
-            //     return res.redirect('/');
-            // }
+            if(user){//有这个user 那么直接跳转
+                return res.redirect('/');
+            }
             // //对密码进行md5加密
             // var md5 = crypto.createHash('md5'),
             //     md5newopenid = md5.update(openid).digest('hex');
