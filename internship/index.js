@@ -203,8 +203,14 @@ app.post('/post',function(req,res){
                     console.log(err);
                     return res.redirect('/post');
                 }
-                console.log('保存实习信息成功!');//怎么实现弹出框!!!!??????
-                return res.redirect('/');
+                else{
+                    console.log('保存实习信息成功!');//怎么实现弹出框!!!!??????
+                    res.render('login',{
+                            // user: req.session.user,//也要加?
+                            title:'内推推推'
+                    });
+                }
+               
             });
         });
 
@@ -220,7 +226,7 @@ app.get('/list',function(req,res){
             }
             res.render('',{
                 title:'内推列表',
-                interns:allInternss
+                interns:allInterns
             });
         })
 });
