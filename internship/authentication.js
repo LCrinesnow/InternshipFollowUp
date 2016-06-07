@@ -16,9 +16,7 @@
 //       return openid;
 //     });
 // }
-var request = require('request');
-var fs = require('fs');
-var Promise = require('promise');
+
   var openid='hehehe';
 function ifAuthorized(req,res,next){
 
