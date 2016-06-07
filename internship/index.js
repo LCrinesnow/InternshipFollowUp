@@ -73,11 +73,11 @@ app.get('/',function ifAuthorized(req,res){
     var query = require('url').parse(req.url,true).query;
           console.log(query);
     
-    if(req.session.code==code){//为了避免程序崩，因为刷新授权会崩
-        res.render('error',{//一个error界面空的
-             title:'请点左上角的X，重新进入。'
-        });
-    }else{
+    // if(req.session.code==code){//为了避免程序崩，因为刷新授权会崩
+    //     // res.render('error',{//一个error界面空的
+    //     //      title:'请点左上角的X，重新进入。'
+    //     // });
+    // }else{
          var code = query.code;
          req.session.code=code;
 
@@ -125,7 +125,7 @@ app.get('/',function ifAuthorized(req,res){
             }
         });
     });  
-    }
+    // }
    
  
     
