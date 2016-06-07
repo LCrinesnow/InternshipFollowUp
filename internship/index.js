@@ -70,7 +70,7 @@ app.use(function(req, res, next) {
 
 
 //响应首页get请求
-// app.get('/',authentication.ifAuthorized);//检测是否登录了
+app.get('/',authentication.ifAuthorized);//检测是否登录了
 app.get('/',function(req,res){
 //openid???
     var openid=authentication.getOpenid;
@@ -104,7 +104,7 @@ app.get('/quit',function(req,res){
 //发布
 
 //响应发布get请求
-// app.get('/post',authentication.ifAuthorized);//检测是否登录了
+app.get('/post',authentication.ifAuthorized);//检测是否登录了
 app.get('/post',function(req,res){
    console.log('发布!');
     res.render('post',{
@@ -143,7 +143,7 @@ app.post('/post',function(req,res){
 
 //博客细节
 
-// app.get('/detail/',authentication.ifAuthorized);//检测是否登录了
+app.get('/detail/',authentication.ifAuthorized);//检测是否登录了
 app.get('/detail/:_id',function(req,res){//:id?
    console.log('查看笔记!');
     Note.findOne({_id:req.params._id}).exec(function(err,art){
