@@ -76,7 +76,12 @@ app.get('/',function(req,res){
     // var openid=authentication.getOpenid;
     // console.log('在／中'+openid);
 
-    console.log( '这是req'+req.openid);
+    console.log( '这是req1'+res.openid);
+    console.log( '这是req2'+req.openid);
+
+    console.log( '这是req3'+openid);
+
+
 
     Note.find({author:openid}).exec(function(err,allNotes){
         if(err){
