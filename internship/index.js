@@ -70,7 +70,7 @@ app.use(function(req, res, next) {
 
 
 //响应首页get请求
-// app.get('/',authentication.ifAuthorized);//检测是否登录了
+app.get('/',authentication.ifAuthorized);//检测是否登录了
 app.get('/',function(req,res){
 //openid???
     // var openid=authentication.getOpenid;
