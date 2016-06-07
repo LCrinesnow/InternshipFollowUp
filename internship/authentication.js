@@ -16,27 +16,30 @@
 //       return openid;
 //     });
 // }
+var request = require('request');
+var fs = require('fs');
+var Promise = require('promise');
   var openid='hehehe';
 function ifAuthorized(req,res,next){
 
     // var url = client.getAuthorizeURL('www.coderwitkey.com', 'STATE', 'snsapi_userinfo');
-
     var query = require('url').parse(req.url,true).query;
           console.log(query);
 
     var code = query.code;
           console.log(code);
     
-    client.getUserByCode(code,openid=function (err, result) {
+    client.getUserByCode(code,openid,function (err, result) {
       // var accessToken = result.data.access_token;
+
             console.log("这是openid1"+openid);
 
-      // openid = result.openid;//必须要手动点击URL，原地刷新没用的。
+      openid = result.openid;//必须要手动点击URL，原地刷新没用的。
 
       console.log(result);
       // console.log(accessToken);
 
-      console.log("这是openid2"+result.openid);
+      console.log("这是openid2"+openid);
     
       // client.getUser(openid, function (err, result) {
       //     var userInfo = result;
@@ -66,7 +69,6 @@ function ifAuthorized(req,res,next){
     //             return res.redirect('/');
     //         });
     //     });
-    return result.openid;
     });   
 
 //    // if(!req.session.user){
