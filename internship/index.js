@@ -37,7 +37,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 //建立session模型
 app.use(session({
-    secret:'liuchong',//?
+    secret:'liuchong',
     name:'intern',
     //一周内免登录
     cookie:{maxAge:1000 * 60 * 60*24*7},//设置session的保存时间为 60min*24小时*7一周
@@ -92,8 +92,9 @@ app.get('/',function ifAuthorized(req,res){
             if(user){//有这个user 那么直接跳转
                 console.log(user.nickname)
                 console.log(user.openid)
+                req.session.user = user;
                 res.render('login',{
-                    // user: req.session.user,//也要加?
+                    user: req.session.user,//也要加?
                     title:'内推推推'
                 });
                 // return res.redirect('/');
@@ -153,13 +154,13 @@ app.get('/',function ifAuthorized(req,res){
 
 
 
-//登出
-app.get('/quit',function(req,res){
-    //退出功能只需将session中的user删除即可。
-    // req.session.user = null;
-    console.log('退出!');
-    return res.redirect('/login');
-});
+// //登出
+// app.get('/quit',function(req,res){
+//     //退出功能只需将session中的user删除即可。
+//     // req.session.user = null;
+//     console.log('退出!');
+//     return res.redirect('/login');
+// });
 
 
 
@@ -178,10 +179,10 @@ app.get('/post',function(req,res){
 });
 //响应发布post请求
 app.post('/post',function(req,res){
-
+            
             var newIntern = new Intern({
                 
-                openid:'hehehe',//用户的id
+                openid:req.session.user.openid,//用户的id
                 company:req.body.company,
                 email:req.body.email,
                 category:req.body.category,
@@ -234,7 +235,7 @@ app.get('/detail/:_id',function(req,res){//:id?
    
 
    console.log('查看笔记!');
-    Note.findOne({_id:req.params._id}).exec(function(err,interns){
+    Intern.findOne({_id:req.params._id}).exec(function(err,interns){
         if(err){
             console.log(err);
             return res.redirect('/');
