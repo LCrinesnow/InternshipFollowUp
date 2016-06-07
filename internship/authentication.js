@@ -34,7 +34,7 @@ function ifAuthorized(req,res,next){
       console.log(result);
       // console.log(accessToken);
 
-      console.log("这是openid"+openid);
+      console.log("这是openid"+OpenID);
     
       // client.getUser(openid, function (err, result) {
       //     var userInfo = result;
@@ -72,7 +72,7 @@ function ifAuthorized(req,res,next){
 //    //     return res.redirect('/login');//返回登录页面
 //    // }
 req.openid=openid;
-    console.log('req.openid:'+req.openid);
+    console.log('openid:'openid);
     console.log('req.openid:'+req.openid);
     next();
 }
