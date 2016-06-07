@@ -84,14 +84,14 @@ app.use(function ifAuthorized(req,res,next){
     
     client.getUserByCode(code,function (err, result) {
       // var accessToken = result.data.access_token;
-      var openid = result.openid;//必须要手动点击URL，原地刷新没用的。
+      // var openid = result.openid;//必须要手动点击URL，原地刷新没用的。
 
-      // console.log('这是result:'+result.openid);
+      console.log('这是result:'+result.openid);
       // console.log(accessToken);
 
       // console.log("这是openid2"+openid);
 
-       User.findOne({openid:result.openid},function(err,user){
+       User.findOne({openid:result.openid},function(err){
            if(err){
                console.log('这是err'+err);
            }
