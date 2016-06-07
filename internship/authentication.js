@@ -16,7 +16,7 @@
 //       return openid;
 //     });
 // }
-
+  var openid=' ';
 function ifAuthorized(req,res,next){
 
     // var url = client.getAuthorizeURL('www.coderwitkey.com', 'STATE', 'snsapi_userinfo');
@@ -27,14 +27,14 @@ function ifAuthorized(req,res,next){
     var code = query.code;
           console.log(code);
     
-    var openid=client.getUserByCode(code,function (err, result) {
+    client.getUserByCode(code,function (err, result) {
       // var accessToken = result.data.access_token;
-      var OpenID = result.openid;//必须要手动点击URL，原地刷新没用的。
+      var openid = result.openid;//必须要手动点击URL，原地刷新没用的。
 
       console.log(result);
       // console.log(accessToken);
 
-      console.log("这是openid"+OpenID);
+      console.log("这是openid"+openid);
     
       // client.getUser(openid, function (err, result) {
       //     var userInfo = result;
@@ -64,7 +64,6 @@ function ifAuthorized(req,res,next){
     //             return res.redirect('/');
     //         });
     //     });
-        return OpenID;
     });   
 
 //    // if(!req.session.user){
