@@ -248,24 +248,38 @@ app.post('/post',function(req,res){
 //
 
 
+app.get('/list',function(req,res){
+     Note.find().exec(function(err,allInterns){
+            if(err){
+                console.log(err);
+                return res.redirect('/');
+            }
+            res.render('',{
+                title:'内推列表',
+                interns:allInternss
+            });
+        })
+});
+
 //博客细节
 
 // app.get('/detail/',authentication.ifAuthorized);//检测是否登录了
 app.get('/detail/:_id',function(req,res){//:id?
+   
+
    console.log('查看笔记!');
-    Note.findOne({_id:req.params._id}).exec(function(err,art){
+    Note.findOne({_id:req.params._id}).exec(function(err,interns){
         if(err){
             console.log(err);
             return res.redirect('/');
         }
-        if(art) {
+        if(intern) {
             res.render('detail', {
                 title: '笔记详情',
-                user: req.session.user,
-                art: art,
+                intern: intern,
                 moment:moment
             });
-            console.log(art);
+            console.log(intern);
         }
     });
 });
