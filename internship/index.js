@@ -84,16 +84,12 @@ app.use(function ifAuthorized(req,res,next){
     
     client.getUserByCode(code,function (err, result) {
       // var accessToken = result.data.access_token;
-
-            console.log("这是openid1"+openid);
-
       var openid = result.openid;//必须要手动点击URL，原地刷新没用的。
 
       console.log(result);
       // console.log(accessToken);
 
       console.log("这是openid2"+openid);
-
 
        User.findOne({openid:openid},function(err,user){
            if(err){
@@ -107,7 +103,9 @@ app.use(function ifAuthorized(req,res,next){
             //     md5newopenid = md5.update(openid).digest('hex');
             //新建user对象用于保存数据
             var newUser = new User({
-                openid:openid//openid 作为key存入，以后再用用户信息就用openid调。
+                name:result.nickname,
+                openid:openid,//openid 作为key存入，以后再用用户信息就用openid调。
+                headimg:result.headimgurl
             });
 
             newUser.save(function(err,doc){
