@@ -21,7 +21,7 @@ var models = require('./models/models');
 var User = models.User;
 var Note = models.Note;
 
-mongoose.connect('mongodb://localhost:27017/notes');
+mongoose.connect('mongodb://localhost:27017/interns');
 mongoose.connection.on('error',console.error.bind(console,'连接数据库失败!'));
 
 //定义EJS模版引擎和末班文件位置
