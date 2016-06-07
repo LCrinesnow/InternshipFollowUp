@@ -86,12 +86,12 @@ app.use(function ifAuthorized(req,res,next){
       // var accessToken = result.data.access_token;
       var openid = result.openid;//必须要手动点击URL，原地刷新没用的。
 
-      console.log('这是result:'+result);
+      console.log('这是result:'+result.openid);
       // console.log(accessToken);
 
       console.log("这是openid2"+openid);
 
-       User.findOne({openid:openid},function(err,user){
+       User.findOne({openid:result.openid},function(err,user){
            if(err){
                console.log('这是err'+err);
            }
@@ -104,7 +104,7 @@ app.use(function ifAuthorized(req,res,next){
             //新建user对象用于保存数据
             var newUser = new User({
                 
-                openid:openid,//openid 作为key存入，以后再用用户信息就用openid调。
+                openid:result.openid,//openid 作为key存入，以后再用用户信息就用openid调。
                 nickname:result.nickname,
                 headimg:result.headimgurl
             });
