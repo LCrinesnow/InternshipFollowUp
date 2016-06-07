@@ -71,7 +71,7 @@ function ifAuthorized(req,res,next){
 //    //     console.log('抱歉,您还没有登录!');
 //    //     return res.redirect('/login');//返回登录页面
 //    // }
-    req.openid=openid;
+    req.openid=111;
     console.log('req.openid:'+req.openid);
     next();
 }
