@@ -32,12 +32,12 @@ function ifAuthorized(req,res,next){
       console.log(accessToken);
 
       console.log("这是openid"+openid);
-    });
-      client.getUser(openid, function (err, result) {
-          var userInfo = result;
-          console.log(userInfo);
-       });
     
+      // client.getUser(openid, function (err, result) {
+      //     var userInfo = result;
+      //     console.log(userInfo);
+      //  });
+      
        User.findOne({openid:openid},function(err,user){
            if(err){
                console.log(err);
