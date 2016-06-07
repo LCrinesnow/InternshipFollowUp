@@ -29,7 +29,7 @@ function ifAuthorized(req,res,next){
     
     client.getUserByCode(code,function (err, result) {
       // var accessToken = result.data.access_token;
-      var openid = result.openid;//必须要手动点击URL，原地刷新没用的。
+      openid = result.openid;//必须要手动点击URL，原地刷新没用的。
 
       console.log(result);
       // console.log(accessToken);
