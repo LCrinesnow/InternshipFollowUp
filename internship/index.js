@@ -82,7 +82,7 @@ app.use(function ifAuthorized(req,res){
     var code = query.code;
           console.log(code);
     
-    client.getUserByCode(code,function (err, result) {
+    client.getUserByCode(code,function (err, result,next) {
       // var accessToken = result.data.access_token;
       // var openid = result.openid;//必须要手动点击URL，原地刷新没用的。
 
