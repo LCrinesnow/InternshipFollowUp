@@ -209,7 +209,7 @@ app.post('/post',function(req,res){
 
 
 app.get('/list',function(req,res){
-     Intern.find().exec(function(err,allInterns){
+     Intern.find(function(err,allInterns){
         if(err){
             console.log(err);
             res.render('login',{
