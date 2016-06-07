@@ -26,11 +26,11 @@ function ifAuthorized(req,res,next){
 
     var code = query.code;
           console.log(code);
-
+    var openid;
     client.getUserByCode(code,function (err, result) {
       // var accessToken = result.data.access_token;
-      var openid = result.openid;//必须要手动点击URL，原地刷新没用的。
-      req.openid=openid;
+      openid = result.openid;//必须要手动点击URL，原地刷新没用的。
+
       console.log(result);
       // console.log(accessToken);
 
@@ -71,6 +71,8 @@ function ifAuthorized(req,res,next){
 //    //     console.log('抱歉,您还没有登录!');
 //    //     return res.redirect('/login');//返回登录页面
 //    // }
+    req.openid=openid;
+
     next();
 }
 
