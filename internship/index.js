@@ -7,7 +7,6 @@ var bodyParser = require('body-parser');
 var crypto = require('crypto');
 var session= require('express-session');
 var moment = require('moment');
-var authentication = require('./authentication.js');
 
 var app = express();
 
@@ -48,31 +47,25 @@ app.use(session({
 
 
 //添加  页面提示功能
-app.use(function(req, res, next) {
-    res.locals.user = req.session.user;//???
-    var err = req.session.error;//赋值给err变量,
-    //var success = req.session.success;//赋值给err变量,
+// app.use(function(req, res, next) {
+//     res.locals.user = req.session.user;//???
+//     var err = req.session.error;//赋值给err变量,
+//     //var success = req.session.success;//赋值给err变量,
 
-    delete req.session.error;//然后清空session内的数据
-    res.locals.message = '';//初始化
-    //res.locals.success = '';//初始化
+//     delete req.session.error;//然后清空session内的数据
+//     res.locals.message = '';//初始化
+//     //res.locals.success = '';//初始化
 
-    if (err) {
-        //html通过js被操作,在html中用{%-message%}调用
-        res.locals.message = '<div class="alert alert-warning">' + err + '</div>';
-    }
-    //if (success) {
-    //    //html通过js被操作,在html中用{%-message%}调用
-    //    res.locals.success = '<div class="alert alert-success">' + success + '</div>';
-    //}
-
-    next();//?
-});
+//     if (err) {
+//         //html通过js被操作,在html中用{%-message%}调用
+//         res.locals.message = '<div class="alert alert-warning">' + err + '</div>';
+//     }
+//     next();//?
+// });
 
 
-   var OAuth = require('wechat-oauth');
-   var client = new OAuth('wx75d11b4f981b1ded', '7a915c525f39451f3af19407012459ad');
- // var openid='hehehe';
+var OAuth = require('wechat-oauth');
+var client = new OAuth('wx75d11b4f981b1ded', '7a915c525f39451f3af19407012459ad');
 app.get('/',function ifAuthorized(req,res){
 
     // var url = client.getAuthorizeURL('www.coderwitkey.com', 'STATE', 'snsapi_userinfo');
@@ -125,52 +118,13 @@ app.get('/',function ifAuthorized(req,res){
             }
         });
     });  
-    // req.code=code; 
-    // next();
 });
-
-//响应首页get请求
-// app.get('/',authentication.ifAuthorized);//检测是否登录了
-// app.get('/',function(req,res){
-    
-//       console.log('首页!');
-//     res.render('login',{
-//         // user: req.session.user,//也要加?
-//         title:'内推推推'
-//     });
-//     // Note.find({author:openid}).exec(function(err,allNotes){
-//     //     if(err){
-//     //         console.log(err);
-//     //         return res.redirect('/');
-//     //     }
-//     //     res.render('index',{
-//     //        title:'首页',
-//     //         openid: openid,
-//     //         notes:allNotes
-//     //     });
-//     // })
-// });
-
-
-
-
-// //登出
-// app.get('/quit',function(req,res){
-//     //退出功能只需将session中的user删除即可。
-//     // req.session.user = null;
-//     console.log('退出!');
-//     return res.redirect('/login');
-// });
-
 
 
 //发布
 
 //响应发布get请求
-// app.get('/post',authentication.ifAuthorized);//检测是否登录了
 app.get('/post',function(req,res){
-    
- 
    console.log('发布!');
     res.render('post',{
         user: req.session.user,//也要加?
@@ -181,7 +135,6 @@ app.get('/post',function(req,res){
 app.post('/post',function(req,res){
             
             var newIntern = new Intern({
-                
                 openid:req.session.user.openid,//用户的id
                 company:req.body.company,
                 email:req.body.email,
@@ -203,8 +156,6 @@ app.post('/post',function(req,res){
                 }
                
             });
-    
-
 });
 //
 
@@ -228,12 +179,8 @@ app.get('/list',function(req,res){
     })
 });
 
-//博客细节
 
-// app.get('/detail/',authentication.ifAuthorized);//检测是否登录了
 app.get('/detail/:_id',function(req,res){//:id?
-   
-
    console.log('查看实习!');
     Intern.findOne({_id:req.params._id}).exec(function(err,intern){
         if(err){
@@ -242,7 +189,7 @@ app.get('/detail/:_id',function(req,res){//:id?
         }
         if(intern) {
             res.render('detail', {
-                title: '实习详情',
+                title: '内推详情',
                 intern: intern,
                 moment:moment
             });
@@ -251,9 +198,6 @@ app.get('/detail/:_id',function(req,res){//:id?
     });
 });
 
-// app.get('https://api.weixin.qq.com/sns/oauth2/access_token?appid=wx75d11b4f981b1ded&secret=7a915c525f39451f3af19407012459ad&code=CODE&grant_type=authorization_code',function(req,res){
-
-// });//获取appid
 
 
 app.listen(3000, function(req,res){
