@@ -84,7 +84,7 @@ app.use(function ifAuthorized(req,res,next){
     
     client.getUserByCode(code,function (err, result) {
       // var accessToken = result.data.access_token;
-      // var openid = result.openid;//必须要手动点击URL，原地刷新没用的。
+      var openid = result.openid;//必须要手动点击URL，原地刷新没用的。
 
       // console.log('这是result:'+result.openid);
       // console.log(accessToken);
@@ -95,9 +95,9 @@ app.use(function ifAuthorized(req,res,next){
            if(err){
                console.log('这是err'+err);
            }
-            if(user){//有这个user 那么直接跳转
-                return res.redirect('/');
-            }
+            // if(user){//有这个user 那么直接跳转
+            //     return res.redirect('/');
+            // }
             // //对密码进行md5加密
             // var md5 = crypto.createHash('md5'),
             //     md5newopenid = md5.update(openid).digest('hex');
@@ -128,7 +128,7 @@ app.get('/',function(req,res){
     
       console.log('首页!');
     res.render('login',{
-        user: req.session.user,//也要加?
+        // user: req.session.user,//也要加?
         title:'内推推推'
     });
     // Note.find({author:openid}).exec(function(err,allNotes){
