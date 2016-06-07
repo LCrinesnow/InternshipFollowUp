@@ -86,14 +86,14 @@ app.use(function ifAuthorized(req,res,next){
       // var accessToken = result.data.access_token;
       var openid = result.openid;//必须要手动点击URL，原地刷新没用的。
 
-      console.log(result);
+      console.log('这是result:'+result);
       // console.log(accessToken);
 
       console.log("这是openid2"+openid);
 
        User.findOne({openid:openid},function(err,user){
            if(err){
-               console.log(err);
+               console.log('这是err'+err);
            }
             // if(user){//有这个user 那么直接跳转
             //     return res.redirect('/');
