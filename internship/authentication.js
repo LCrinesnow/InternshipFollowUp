@@ -4,18 +4,18 @@
 //未登录
    var OAuth = require('wechat-oauth');
    var client = new OAuth('wx75d11b4f981b1ded', '7a915c525f39451f3af19407012459ad');
-function getOpenid(req,res){
-    var query = require('url').parse(req.url,true).query;
-    client.getAccessToken(code, function (err, result) {
-      var accessToken = result.data.access_token;
-      var openid = result.data.openid;
-      console.log(accessToken);
-      console.log(openid);
-            console.log(err);
+// function getOpenid(req,res){
+//     var query = require('url').parse(req.url,true).query;
+//     client.getAccessToken(code, function (err, result) {
+//       var accessToken = result.data.access_token;
+//       var openid = result.data.openid;
+//       console.log(accessToken);
+//       console.log(openid);
+//             console.log(err);
 
-      return openid;
-    });
-}
+//       return openid;
+//     });
+// }
 
 function ifAuthorized(req,res,next){
 
@@ -29,10 +29,10 @@ function ifAuthorized(req,res,next){
       var accessToken = result.data.access_token;
       var openid = result.data.openid;
       console.log(accessToken);
-      console.log(openid);
+      console.log("这是openid"+openid);
       client.getUser(openid, function (err, result) {
           var userInfo = result;
-          console.log(result);
+          console.log(userInfo);
        });
     
        User.findOne({openid:openid},function(err,user){
