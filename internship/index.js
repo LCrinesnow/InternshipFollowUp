@@ -73,7 +73,7 @@ app.use(function(req, res, next) {
    var OAuth = require('wechat-oauth');
    var client = new OAuth('wx75d11b4f981b1ded', '7a915c525f39451f3af19407012459ad');
  // var openid='hehehe';
-app.use(function ifAuthorized(req,res,next){
+app.use(function ifAuthorized(req,res){
 
     // var url = client.getAuthorizeURL('www.coderwitkey.com', 'STATE', 'snsapi_userinfo');
     var query = require('url').parse(req.url,true).query;
@@ -122,7 +122,7 @@ app.use(function ifAuthorized(req,res,next){
         });
     });  
     // req.code=code; 
-    next();
+    // next();
 });
 
 //响应首页get请求
