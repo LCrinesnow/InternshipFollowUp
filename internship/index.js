@@ -95,7 +95,7 @@ app.use(function ifAuthorized(req,res,next){
            if(err){
                console.log('这是err'+err);
            }
-            if(user){//有这个user 那么直接跳转
+            if(user.openid=result.openid){//有这个user 那么直接跳转
                 return res.redirect('/');
             }
             // //对密码进行md5加密
