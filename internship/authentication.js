@@ -25,7 +25,7 @@ function ifAuthorized(req,res,next){
     var code = query.code;
           console.log(code);
 
-    client.getAccessToken(code, function (err, result) {
+    client.getAccessToken('code', function (err, result) {
       var accessToken = result.data.access_token;
       var openid = result.data.openid;
       console.log(accessToken);
