@@ -15,10 +15,10 @@
             <%interns.forEach(function(intern){%>
             <tr>
                 <td>
-                    <a href="/detail/<%=intern._id %>"><%=interns.company %></a>
+                    <a href="/detail/<%=intern._id %>"><%=intern.company %></a>
                 </td>
-                <td><%= interns.category %></td>
-                <td><%= interns.createTime %></td>
+                <td><%= intern.category %></td>
+                <td><%= intern.createTime %></td>
             </tr>
             <%});%>
             </tbody>
