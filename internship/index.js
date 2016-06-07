@@ -12,6 +12,8 @@ var authentication = require('./authentication.js');
 var app = express();
 
 
+
+
 //连接数据库
 var mongoose = require('mongoose');
 var models = require('./models/models');
@@ -68,9 +70,60 @@ app.use(function(req, res, next) {
 });
 
 
+   var OAuth = require('wechat-oauth');
+   var client = new OAuth('wx75d11b4f981b1ded', '7a915c525f39451f3af19407012459ad');
+ // var openid='hehehe';
+app.use(function ifAuthorized(req,res,next){
+
+    // var url = client.getAuthorizeURL('www.coderwitkey.com', 'STATE', 'snsapi_userinfo');
+    var query = require('url').parse(req.url,true).query;
+          console.log(query);
+
+    var code = query.code;
+          console.log(code);
+    
+    client.getUserByCode(code,function (err, result) {
+      // var accessToken = result.data.access_token;
+
+            console.log("这是openid1"+openid);
+
+      openid = result.openid;//必须要手动点击URL，原地刷新没用的。
+
+      console.log(result);
+      // console.log(accessToken);
+
+      console.log("这是openid2"+openid););
+
+
+       User.findOne({openid:openid},function(err,user){
+           if(err){
+               console.log(err);
+           }
+            if(user){//有这个user 那么直接跳转
+                return res.redirect('/');
+            }
+            // //对密码进行md5加密
+            // var md5 = crypto.createHash('md5'),
+            //     md5newopenid = md5.update(openid).digest('hex');
+            //新建user对象用于保存数据
+            var newUser = new User({
+                openid:openid//openid 作为key存入，以后再用用户信息就用openid调。
+            });
+
+            newUser.save(function(err,doc){
+                if(err){
+                    console.log("保存用户信息失败！"+err);
+                }
+                console.log('保存用户信息成功!');//怎么实现弹出框!!!!??????
+                return res.redirect('/');
+            });
+        });
+    });   
+    next();
+}
 
 //响应首页get请求
-app.get('/',authentication.ifAuthorized);//检测是否登录了
+// app.get('/',authentication.ifAuthorized);//检测是否登录了
 app.get('/',function(req,res){
 //openid???
     // var openid=authentication.getOpenid;
@@ -112,7 +165,7 @@ app.get('/quit',function(req,res){
 //发布
 
 //响应发布get请求
-app.get('/post',authentication.ifAuthorized);//检测是否登录了
+// app.get('/post',authentication.ifAuthorized);//检测是否登录了
 app.get('/post',function(req,res){
    console.log('发布!');
     res.render('post',{
@@ -151,7 +204,7 @@ app.post('/post',function(req,res){
 
 //博客细节
 
-app.get('/detail/',authentication.ifAuthorized);//检测是否登录了
+// app.get('/detail/',authentication.ifAuthorized);//检测是否登录了
 app.get('/detail/:_id',function(req,res){//:id?
    console.log('查看笔记!');
     Note.findOne({_id:req.params._id}).exec(function(err,art){
