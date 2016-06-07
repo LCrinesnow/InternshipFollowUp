@@ -76,21 +76,21 @@ app.get('/',function(req,res){
     // var openid=authentication.getOpenid;
     // console.log('在／中'+openid);
 
- var query = require('url').parse(req.url,true).query;
-          console.log(query);
+ // var query = require('url').parse(req.url,true).query;
+ //          console.log(query);
 
-    var code = query.code;
-          console.log(code);
+ //    var code = query.code;
+ //          console.log(code);
 
-    client.getAccessToken(code, function (err, result) {
-      var accessToken = result.data.access_token;
-      var openid = result.data.openid;
-      console.log(accessToken);
-      console.log(openid);
-      client.getUser(openid, function (err, result) {
-          var userInfo = result;
-          console.log(result);
-       });
+ //    client.getAccessToken(code, function (err, result) {
+ //      var accessToken = result.data.access_token;
+ //      var openid = result.data.openid;
+ //      console.log(accessToken);
+ //      console.log(openid);
+ //      client.getUser(openid, function (err, result) {
+ //          var userInfo = result;
+ //          console.log(result);
+ //       });
 
 
     
