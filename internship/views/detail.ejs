@@ -1,22 +1,27 @@
 <%-include header%>
-<header class='demos-header'>
-    <h1 class="demos-title">实习消息</h1>
-</header>
 
-<article class="weui_article">
-    <h1><%=intern.company%></h1>
-    <section>
-        <h2 class="title"><%=intern.category%></h2>
-        <section>
-            <h3>
-                <span class="text-bold">时间:</span>
-                <%= moment(intern.createTime).locale('zh-cn').format('LL HH:mm:ss')%>
-                </span>
-            </h3>
-            <p><%= intern.content%></p>
-        </section>
-    </section>
-</article>
+
+
+
+<div class = "text-center page-title">查看实习</div>
+<div class = "container">
+    <div class="row">
+        <div class="col-xs-8 col-xs-offset-2">
+            <div class="article-box">
+                <h1 class="text-center">实习消息</h1>
+                <p class="text-center">
+                    <span class="label label-info"><%=intern.category%></span>
+                    <span class="label label-info"><%=intern.company%></span>
+
+                    <span class="create-time">
+                        <span class="text-bold">时间:</span>
+                        <%= moment(intern.createTime).locale('zh-cn').format('LL HH:mm:ss')%>
+                    </span>
+                </p>
+                <p><%= intern.content%></p>
+            </div>
+        </div>
+    </div>
+</div>
 
 <%-include footer%>
-

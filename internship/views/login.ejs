@@ -1,17 +1,18 @@
 <%- include header %>
-<div class="weui_msg">
-<div class="weui_text_area">
-    <h1>内推实习</h1>
-</div>
-    <div class="weui_opr_area">
-        <p class="weui_btn_area">
-                <a href="/post/"class="weui_btn weui_btn_primary">发布内推</a>
-        </p>
-    </div>
-    <div class="weui_opr_area">
-        <p class="weui_btn_area">
-            <a href="/list/"class="weui_btn weui_btn_primary">查看内推</a>
-        </p>
+<div class="text-center page-title">内推实习</div>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-4 col-xs-offset-4">
+            <form method="post">
+                <%- message %>
+                <div class="form-group">
+                   <a href="/post/">发布内推</a>
+                </div>
+                <div class="form-group">
+                   <a href="/list/">查看内推</a>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 <%-include footer %>

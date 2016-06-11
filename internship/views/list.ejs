@@ -1,21 +1,28 @@
 <%-include header%>
 
-<div class="weui_panel weui_panel_access">
-    <div class="weui_panel_hd">
-       <h1>少年，你的实习</h1>
-    </div>
-    <div class="weui_panel_bd">
-
-        <%interns.forEach(function(intern){%>
-        <div>
-            <div class="weui_media_box weui_media_text">
-                <a href="/detail/<%=intern._id %>">
-                    <h4 class="weui_media_title"><%=intern.company %></h4>
-                    <p class="weui_media_desc"><%= intern.category %>&nbsp&nbsp<%= intern.createTime %></p>
-                </a>
-            </div>
-        </div>
-        <%});%>
+<div class = "container">
+    <div class="row">
+        <table class = "table table-striped">
+            <caption>少年，你的实习</caption>
+            <thead>
+            <tr>
+                <th>公司</th>
+                <th>类别</th>
+                <th>发布时间</th>
+            </tr>
+            </thead>
+            <tbody>
+            <%interns.forEach(function(intern){%>
+            <tr>
+                <td>
+                    <a href="/detail/<%=intern._id %>"><%=intern.company %></a>
+                </td>
+                <td><%= intern.category %></td>
+                <td><%= intern.createTime %></td>
+            </tr>
+            <%});%>
+            </tbody>
+        </table>
     </div>
 </div>
 
