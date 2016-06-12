@@ -74,18 +74,29 @@ app.get('/',function ifAuthorized(req,res){
           console.log(query);
     
     if(req.session.code==code){//为了避免程序崩，因为刷新授权会崩
-        // res.render('error',{//一个error界面空的
-        //      title:'请点左上角的X，重新进入。'
-        // });
+         User.findOne({openid:req.session.openid},function(err,user){
+           if(err){
+               console.log('这是err'+err);
+           }
+            if(user){//有这个user 那么直接跳转
+                console.log(user.nickname)
+                console.log(user.openid)
+                req.session.user = user;
+                res.render('login',{
+                    user: req.session.user,//也要加?
+                    title:'内推推推'
+                });
+            }
     }else{
          var code = query.code;
          req.session.code=code;
-
-          console.log(code);
+         console.log(code);
           client.getUserByCode(code,function (err, result) {
       // var openid = result.openid;//必须要手动点击URL，原地刷新没用的。
        console.log('这是result:'+result.openid);
-       User.findOne({openid:result.openid},function(err,user){
+                req.session.openid=result.openid;
+
+       User.findOne({openid:req.session.openid},function(err,user){
            if(err){
                console.log('这是err'+err);
            }
@@ -125,7 +136,7 @@ app.get('/',function ifAuthorized(req,res){
             }
         });
     });  
-  }
+  // }
    
  
     
