@@ -87,6 +87,7 @@ app.get('/',function ifAuthorized(req,res){
                     title:'内推推推'
                 });
             }
+        }
     }else{
          var code = query.code;
          req.session.code=code;
