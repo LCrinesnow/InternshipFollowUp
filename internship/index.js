@@ -71,8 +71,9 @@ app.get('/',function ifAuthorized(req,res){
 
     // var url = client.getAuthorizeURL('www.coderwitkey.com', 'STATE', 'snsapi_userinfo');
     var query = require('url').parse(req.url,true).query;
-          console.log(query);
-    
+          console.log("wai"+query);
+    var code = query.code;
+
     if(req.session.code==code){//为了避免程序崩，因为刷新授权会崩
          User.findOne({openid:req.session.openid},function(err,user){
            if(err){
@@ -91,7 +92,7 @@ app.get('/',function ifAuthorized(req,res){
     }else{
         var code = query.code;
         req.session.code=code;
-        console.log(code);
+        console.log("else"+code);
         client.getUserByCode(code,function (err, result) {
       // var openid = result.openid;//必须要手动点击URL，原地刷新没用的。
             console.log('这是result:'+result.openid);
