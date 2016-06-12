@@ -9,7 +9,7 @@
         <div class="weui_media_box weui_media_text">
             <a href="/detail/<%=intern._id %>">
                 <h4 class="weui_media_title text-center"><%=intern.company %></h4>
-                <p class="weui_media_desc"><%= intern.category %>&nbsp&nbsp<%= intern.createTime %></p>
+                <p class="weui_media_desc"><%= intern.category %>&nbsp&nbsp<%= moment(intern.createTime).locale('zh-cn').format('LL') %></p>
             </a>
         </div>
     </div>

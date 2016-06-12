@@ -62,7 +62,7 @@ app.use(function(req, res, next) {
     }
     next();//
 });
-//添加  页面提示功能   目前没用
+//添加  页面提示功能   目前没用 
 
 
 var OAuth = require('wechat-oauth');
@@ -184,7 +184,8 @@ app.get('/list',function(req,res){
         else{
             res.render('list',{
             title:'内推列表',
-            interns:allInterns
+            interns:allInterns,
+            moment:moment
             });
         }
             
