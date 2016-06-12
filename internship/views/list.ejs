@@ -1,28 +1,28 @@
 <%-include header%>
 
-<div class = "container">
-    <div class="row">
-        <table class = "table table-striped">
-            <caption>少年，你的实习</caption>
-            <thead>
-            <tr>
-                <th>公司</th>
-                <th>类别</th>
-                <th>发布时间</th>
-            </tr>
-            </thead>
-            <tbody>
-            <%interns.forEach(function(intern){%>
-            <tr>
-                <td>
-                    <a href="/detail/<%=intern._id %>"><%=intern.company %></a>
-                </td>
-                <td><%= intern.category %></td>
-                <td><%= intern.createTime %></td>
-            </tr>
-            <%});%>
-            </tbody>
-        </table>
+<div class="weui_panel weui_panel_access">
+    <div class="weui_panel_hd">
+       <h1>少年，你的实习</h1>
+    </div>
+    <div class="weui_panel_bd">
+        <div class="weui_media_box weui_media_text">
+            <h4 class="weui_media_title">标题一</h4>
+            <p class="weui_media_desc">由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。</p>
+        </div>
+        <div class="weui_media_box weui_media_text">
+            <h4 class="weui_media_title">标题二</h4>
+            <p class="weui_media_desc">由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。</p>
+        </div>
+        <%interns.forEach(function(intern){%>
+        <div>
+            <div class="weui_media_box weui_media_text">
+                <a href="/detail/<%=intern._id %>">
+                    <h4 class="weui_media_title"><%=intern.company %></h4>
+                    <p class="weui_media_desc"><%= intern.category %>&nbsp&nbsp<%= intern.createTime %></p>
+                </a>
+            </div>
+        </div>
+        <%});%>
     </div>
 </div>
 
