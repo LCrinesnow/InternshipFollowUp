@@ -1,19 +1,18 @@
 <%-include header%>
 <header class='demos-header'>
-    <h1 class="demos-title">实习消息</h1>
+    <h1 class="demos-title"style="color:#C0C0C0;">实习消息</h1>
 </header>
-
 <article class="weui_article">
-    <h1><%=intern.company%></h1>
+    <h1 class="text-center"style="color:#6699FF;"><%=intern.company%></h1>
     <section>
-        <h2 class="title"><%=intern.category%></h2>
+        <h2 class="text-center"style="color:#CC0000;"><%=intern.category%></h2>
         <section>
             <h3>
-                <span class="text-bold">时间:</span>
+                <span class="text-bold text-center"style="color:#CC6633;">时间:</span>
                 <%= moment(intern.createTime).locale('zh-cn').format('LL HH:mm:ss')%>
                 </span>
             </h3>
-            <p><%= intern.content%></p>
+            <p>&nbsp;&nbsp;<%= intern.content%></p>
         </section>
     </section>
 </article>
