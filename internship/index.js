@@ -68,8 +68,7 @@ app.use(function(req, res, next) {
 var OAuth = require('wechat-oauth');
 var client = new OAuth('wx75d11b4f981b1ded', '7a915c525f39451f3af19407012459ad');
 app.get('/',function ifAuthorized(req,res){
-
-    // var url = client.getAuthorizeURL('www.coderwitkey.com', 'STATE', 'snsapi_userinfo');
+    //query仅在点击链接时重新生成，在授权界面刷新的话会使用旧Query和旧的code，无法生成openid程序会蹦
     var query = require('url').parse(req.url,true).query;
           console.log("wai"+query);
     var code = query.code;
