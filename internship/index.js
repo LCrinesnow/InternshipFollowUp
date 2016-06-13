@@ -9,6 +9,8 @@ var session= require('express-session');
 var moment = require('moment');
 
 var app = express();
+var API = require('wechat').API;
+var api = new API('wx1d3765eb45497a18', 'ZMrYxJD9UWZyM5oG2lsDMIuBUpirLBLDXX__2LvSF-WGYuGzAtIcBe-f1_SF1Giw', 'wx1d3765eb45497a18');
 
 var WXBizMsgCrypt = require('wechat-crypto');
 
@@ -80,10 +82,11 @@ app.use(function(req, res, next) {
 });
 //添加  页面提示功能   目前没用 
 
-var OAuth = require('wechat-oauth');
-var client = new OAuth('wx1d3765eb45497a18', 'ZMrYxJD9UWZyM5oG2lsDMIuBUpirLBLDXX__2LvSF-WGYuGzAtIcBe-f1_SF1Giw');
+// var OAuth = require('wechat-oauth');
+// var client = new OAuth('wx1d3765eb45497a18', 'ZMrYxJD9UWZyM5oG2lsDMIuBUpirLBLDXX__2LvSF-WGYuGzAtIcBe-f1_SF1Giw');
 app.get('/',function ifAuthorized(req,res){
     //query仅在点击链接时重新生成，在授权界面刷新的话会使用旧Query和旧的code，无法生成openid程序会蹦
+
     var query = require('url').parse(req.url,true).query;
           console.log("wai"+query);
     var code = query.code;
@@ -107,13 +110,11 @@ app.get('/',function ifAuthorized(req,res){
         var code = query.code;
         req.session.code=code;
         console.log("else"+code);
-        client.getUserByCode(code,function (err, result) {
+        api.getUserByCode(code,function (err, result) {
       // var openid = result.openid;//必须要手动点击URL，原地刷新没用的。
-            console.log('这是result:'+result);
-                        console.log('这是resultdataid:'+result.data.UserId);
-                        console.log('这是resultdata:'+result.data);
+                        console.log('这是resultdataid:'+result.UserId);
 
-            req.session.openid=result.data.UserId;
+            req.session.openid=result.UserId;
 
             User.findOne({openid:req.session.openid},function(err,user){
                if(err){
