@@ -5,7 +5,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var userSchema = new Schema({
-    openid: String,
+    UserId: String,
     nickname: String,
     headimg: String,
     createTime: {
@@ -15,7 +15,7 @@ var userSchema = new Schema({
 });
 
 var internSchema = new Schema({
-    openid:String,//用户的id
+    UserId:String,//用户的id
     company:String,
     email:String,
     category:String,

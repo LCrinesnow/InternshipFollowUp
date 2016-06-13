@@ -92,13 +92,13 @@ app.get('/',function ifAuthorized(req,res){
     var code = query.code;
 
     if(req.session.code==code){//为了避免程序崩，因为刷新授权会崩
-         User.findOne({openid:req.session.openid},function(err,user){
+         User.findOne({UserId:req.session.UserId},function(err,user){
            if(err){
                console.log('这是err'+err);
            }
             if(user){//有这个user 那么直接跳转
                 console.log(user.nickname)
-                console.log(user.openid)
+                console.log(user.UserId)
                 req.session.user = user;
                 res.render('login',{
                     user: req.session.user,//也要加?
@@ -112,11 +112,11 @@ app.get('/',function ifAuthorized(req,res){
         console.log("else"+code);
         api.getUserIdByCode(code,function (err, result) {
       // var openid = result.openid;//必须要手动点击URL，原地刷新没用的。
-                        console.log('这是resultdataid:'+result.UserId);
+            console.log('这是resultdataid:'+result.UserId);
 
-            req.session.openid=result.UserId;
+            req.session.UserId=result.UserId;
 
-            User.findOne({openid:req.session.openid},function(err,user){
+            User.findOne({UserId:req.session.UserId},function(err,user){
                if(err){
                    console.log('这是err'+err);
                }
@@ -134,7 +134,7 @@ app.get('/',function ifAuthorized(req,res){
                 else{
                     var newUser = new User({
                     
-                        openid:result.UserId,//openid 作为key存入，以后再用用户信息就用openid调。
+                        UserId:result.UserId,//openid 作为key存入，以后再用用户信息就用openid调。
                         nickname:result.nickname,
                         headimg:result.headimgurl
                     });
@@ -175,7 +175,7 @@ app.get('/post',function(req,res){
 app.post('/post',function(req,res){
             
             var newIntern = new Intern({
-                openid:req.session.user.openid,//用户的id
+                UserId:req.session.user.UserId,//用户的id
                 company:req.body.company,
                 email:req.body.email,
                 category:req.body.category,
