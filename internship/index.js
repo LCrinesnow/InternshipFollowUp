@@ -109,8 +109,8 @@ app.get('/',function ifAuthorized(req,res){
         console.log("else"+code);
         client.getUserByCode(code,function (err, result) {
       // var openid = result.openid;//必须要手动点击URL，原地刷新没用的。
-            console.log('这是result:'+result.userid);
-            req.session.openid=result.userid;
+            console.log('这是result:'+result.UserId);
+            req.session.openid=result.UserId;
 
             User.findOne({openid:req.session.openid},function(err,user){
                if(err){
