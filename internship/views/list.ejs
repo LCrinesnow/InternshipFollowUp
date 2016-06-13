@@ -4,17 +4,27 @@
     <div class="weui_panel_hd text-center">
        <h1>少年，你的实习</h1>
     </div>
-    <%interns.forEach(function(intern){%>
-    <div>
-        <div class="weui_media_box weui_media_text">
-            <a href="/detail/<%=intern._id %>">
-                <h4 class="weui_media_title text-center"><%=intern.company %></h4>
-                <p class="weui_media_desc"><%= intern.category %>&nbsp&nbsp<%= moment(intern.createTime).locale('zh-cn').format('LL') %></p>
-            </a>
-        </div>
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered" >
+            <tr>
+                <th>公司</th>
+                <th>类别</th>
+                <th>发布时间</th>
+            </tr>
+            <%interns.forEach(function(intern){%>
+            <tr>
+                <td>
+                    <a href="/detail/<%=intern._id %>">
+                        <%=intern.company %>
+                    </a>
+                </td>
+                <td><%= intern.category %></td>
+                <td><%= moment(intern.createTime).locale('zh-cn').format('LL') %></td>
+
+            </tr>
+            <%});%>
+        </table>
     </div>
-    <%});%>
     </div>
-</div>
 
 <%-include footer%>
