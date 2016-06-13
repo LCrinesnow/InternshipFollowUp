@@ -175,7 +175,7 @@ app.get('/post',function(req,res){
 app.post('/post',function(req,res){
             
             var newIntern = new Intern({
-                UserId:req.session.user.UserId,//用户的id
+                UserId:req.session.UserId,//用户的id
                 company:req.body.company,
                 email:req.body.email,
                 category:req.body.category,
