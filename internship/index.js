@@ -9,8 +9,8 @@ var session= require('express-session');
 var moment = require('moment');
 
 var app = express();
-var API = require('wechat').API;
-var api = new API('wx1d3765eb45497a18', 'ZMrYxJD9UWZyM5oG2lsDMIuBUpirLBLDXX__2LvSF-WGYuGzAtIcBe-f1_SF1Giw', 'wx1d3765eb45497a18');
+var API = require('wechat');
+var api = new API('wx1d3765eb45497a18','ZMrYxJD9UWZyM5oG2lsDMIuBUpirLBLDXX__2LvSF-WGYuGzAtIcBe-f1_SF1Giw','wx1d3765eb45497a18');
 
 var WXBizMsgCrypt = require('wechat-crypto');
 
