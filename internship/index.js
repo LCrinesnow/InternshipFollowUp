@@ -110,7 +110,7 @@ app.get('/',function ifAuthorized(req,res){
         var code = query.code;
         req.session.code=code;
         console.log("else"+code);
-        api.getUserByCode(code,function (err, result) {
+        api.getUserIdByCode(code,function (err, result) {
       // var openid = result.openid;//必须要手动点击URL，原地刷新没用的。
                         console.log('这是resultdataid:'+result.UserId);
 
