@@ -121,23 +121,20 @@ app.get('/',function ifAuthorized(req,res){
                    console.log('这是err'+err);
                }
                 if(user){//有这个user 那么直接跳转
-                    console.log(user.nickname)
-                    console.log(user.openid)
+                    // console.log(user.nickname)
+                    // console.log(user.openid)
                     req.session.user = user;
                     res.render('login',{
                         user: req.session.user,//也要加?
                         title:'内推推推'
                     });
-                    // return res.redirect('/');
                 }
-                // //对密码进行md5加密
-                // var md5 = crypto.createHash('md5'),
-                //     md5newopenid = md5.update(openid).digest('hex');
+             
                 //新建user对象用于保存数据
                 else{
                     var newUser = new User({
                     
-                        openid:result.openid,//openid 作为key存入，以后再用用户信息就用openid调。
+                        openid:result.UserId,//openid 作为key存入，以后再用用户信息就用openid调。
                         nickname:result.nickname,
                         headimg:result.headimgurl
                     });
