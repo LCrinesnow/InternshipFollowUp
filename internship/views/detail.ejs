@@ -1,21 +1,40 @@
 <%-include header%>
-<header class='demos-header'>
-    <h1 class="demos-title"style="color:#C0C0C0;">实习消息</h1>
+<div class="main-container">
+<header>
+    <h1 class="text-center text-warning" >实习消息</h1>
 </header>
-<article class="weui_article">
-    <h1 class="text-center"style="color:#6699FF;"><%=intern.company%></h1>
-    <section>
-        <h2 class="text-center"style="color:#CC0000;"><%=intern.category%></h2>
-        <section>
-            <h3>
-                <span class="text-bold text-center"style="color:#CC6633;">时间:</span>
-                <%= moment(intern.createTime).locale('zh-cn').format('LL')%>
-                </span>
-            </h3>
-            <p>&nbsp;&nbsp;<%= intern.content%></p>
-        </section>
-    </section>
-</article>
+    <h3 class="text-center"style="color:#CC6633;"><%=intern.company%></h3>
+<div class="profile-user-info profile-user-info-striped">
+    <div class="profile-info-row">
+        <div class="profile-info-name"> 类别 </div>
 
+        <div class="profile-info-value">
+            <span ><%=intern.category%></span>
+        </div>
+    </div>
+
+    <div class="profile-info-row">
+        <div class="profile-info-name"> 发布时间 </div>
+
+        <div class="profile-info-value">
+            <span ><%= moment(intern.createTime).locale('zh-cn').format('LL')%></span>
+        </div>
+    </div>
+
+    <div class="profile-info-row">
+        <div class="profile-info-name"> 详细内容 </div>
+
+        <div class="profile-info-value">
+            <blockquote>
+                <p class="lighter line-height-125">
+                    <%= intern.content%>                </p>
+            </blockquote>
+        </div>
+    </div>
+
+
+
+</div>
+    </div>
 <%-include footer%>
 

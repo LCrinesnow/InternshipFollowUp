@@ -7,12 +7,11 @@
     <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="/jquery-weui/dist/lib/weui.css">
     <link rel="stylesheet" href="/jquery-weui/dist/css/jquery-weui.css">
-    <link rel="stylesheet" href="css/demos.css">
-
+    <link rel="stylesheet" href="/assets/css/ace.css">
 </head>
-<body >
+<body>
 
-<div class="clearfix page-nav">
+<div class="clearfix page-nav bg-info">
     <!--这里判断user是不是为空,若为空的话显示注册登录,不为空的话说明session没过期或没有quit-->
     <%if(user){%>
     <div class="pull-left nav-username">欢迎你,<%=user.nickname %>!</div>
