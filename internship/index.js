@@ -9,8 +9,8 @@ var session= require('express-session');
 var moment = require('moment');
 
 var app = express();
-var api = require('wechat-enterprise').API('wx1d3765eb45497a18','ZMrYxJD9UWZyM5oG2lsDMIuBUpirLBLDXX__2LvSF-WGYuGzAtIcBe-f1_SF1Giw','wx1d3765eb45497a18');
-// var api = new API('wx1d3765eb45497a18','ZMrYxJD9UWZyM5oG2lsDMIuBUpirLBLDXX__2LvSF-WGYuGzAtIcBe-f1_SF1Giw','wx1d3765eb45497a18');
+var API = require('wechat-enterprise').API;
+var api = new API('wx1d3765eb45497a18','ZMrYxJD9UWZyM5oG2lsDMIuBUpirLBLDXX__2LvSF-WGYuGzAtIcBe-f1_SF1Giw','wx1d3765eb45497a18');
 
 var WXBizMsgCrypt = require('wechat-crypto');
 
@@ -110,7 +110,7 @@ app.get('/',function ifAuthorized(req,res){
         var code = query.code;
         req.session.code=code;
         console.log("else"+code);
-        api.getUser(1,function (err, result) {
+        api.getUserIdByCode(code,function (err, result) {
       // var openid = result.openid;//必须要手动点击URL，原地刷新没用的。
                         console.log('这是resultdataid:'+result.UserId);
 
